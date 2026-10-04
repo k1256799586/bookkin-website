@@ -1,0 +1,22 @@
+---
+import { site } from '../../site.config.mjs';
+import Icon from './Icon.astro';
+interface Props {
+  platform: 'iOS' | 'Android';
+  option: { kind: string; url: string; label: string; note: string };
+}
+const { platform, option } = Astro.props;
+---
+<div class="platform-option" data-platform={platform} data-status={option.kind}>
+  <div class="platform-heading"><Icon name="phone" size={22} /><h3>{platform}</h3></div>
+  {option.kind === 'store' ? (
+    <a href={option.url} class="store-badge" aria-label={option.label}>
+      <img src={site.asset(platform === 'iOS' ? 'store-badges/app-store.svg' : 'store-badges/google-play.png')} alt={option.label} width={platform === 'iOS' ? 120 : 478} height={platform === 'iOS' ? 40 : 142} loading="lazy" />
+    </a>
+  ) : option.url ? (
+    <a class="button button-small" href={option.url}>{option.label}<Icon name="arrow" size={18} /></a>
+  ) : (
+    <p class="coming-soon">Coming soon</p>
+  )}
+  <p class="platform-note">{option.note}</p>
+</div>

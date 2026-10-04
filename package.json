@@ -1,0 +1,32 @@
+{
+  "name": "bookkin-website",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev --host 127.0.0.1",
+    "check": "astro check",
+    "build": "node scripts/generate-og.mjs && astro build",
+    "preview": "astro preview --host 127.0.0.1",
+    "test": "node --test tests/*.test.mjs",
+    "verify": "npm run check && npm test && npm run build && node scripts/verify-build.mjs"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "@fontsource-variable/manrope": "^5.3.0",
+    "@fontsource/newsreader": "^5.3.0",
+    "astro": "^7.3.5",
+    "qrcode": "^1.5.4"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@types/qrcode": "^1.5.6",
+    "jsqr": "^1.4.0",
+    "satori": "^0.32.0",
+    "sharp": "^0.35.5",
+    "typescript": "^6.0.3"
+  }
+}

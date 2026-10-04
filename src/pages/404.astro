@@ -1,0 +1,6 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../../site.config.mjs';
+---
+<Layout title="Page not found — Bookkin" description="This page seems to have slipped off the shelf. Head back to Bookkin." notFound><section class="not-found wrap"><p class="eyebrow">404 / A missing page</p><h1>This one slipped<br /><em>off the shelf.</em></h1><p>Let’s get you back to the books.</p><a class="button" href={site.base}>Back to Bookkin <Icon name="arrow" /></a></section></Layout>
