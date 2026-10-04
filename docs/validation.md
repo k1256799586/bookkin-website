@@ -18,13 +18,19 @@
 
 `robots.txt` 在 GitHub 默认项目子目录下不具有爬取规则效力；根路径限制与 sitemap 提交方法已记录在 [托管说明](./hosting.md)。本次检查未把子目录 robots.txt 的存在当作搜索引擎已采用的证据。
 
-## 待完成的验收
+## 线上与浏览器验收
 
-- 浏览器实际检查：桌面、平板及手机首屏/下载区、键盘焦点与 FAQ、减少动态效果、资源请求和横向溢出；保存官网桌面与手机效果截图。
-- GitHub 远端发布：确认 Actions deployment 成功，实际默认网址及资源可访问，并从线上页面复核二维码与链接。当前文档尚未记录远端部署成功。
-- 自定义域名：待确定域名后执行 TXT 验证、Pages 绑定、DNS、HTTPS 与最终 URL 检查；本次未操作 Squarespace DNS。
+- 2026-10-04，部署提交 `add7900` 的 [GitHub Actions 工作流](https://github.com/k1256799586/bookkin-website/actions/runs/37197550887) **success**。公开官网 [https://k1256799586.github.io/bookkin-website/](https://k1256799586.github.io/bookkin-website/) 返回 **HTTPS 200**。公开源仓库与原私有应用仓库独立。
+- 独立 HTTP 验收检查 28 个 URL：首页及全部 23 项引用资源（含 9 个字体）正常；favicon、App icon、分享图、二维码、sitemap 与 robots 内容类型正确，无混合内容或意外跳转。
+- 线上二维码像素实际解码为 `https://k1256799586.github.io/bookkin-website/#download`；canonical 与 sitemap 使用相同部署根地址。不存在的子路径返回真正的 HTTP 404、Bookkin 自定义错误页和 `noindex`。
+- 浏览器检查 320 px、390 px 手机、768 px 平板和 1440 px 桌面宽度：无横向溢出；手机保留顶部 Download，下载区可见真实平台状态和网页版入口。桌面显示可识别的二维码。
+- Features、How it works、Download 与返回顶部锚点可用；下载区定位在固定导航下方。Enter 可打开/关闭原生 FAQ，Tab 可移动到导航，键盘焦点有明确轮廓。图片具备说明性替代文字，装饰图形隐藏于辅助技术。
+- 正文颜色计算对比度为 5.00:1，卡片正文 5.41:1，主文字 13.70:1，浅绿区正文 5.19:1。`prefers-reduced-motion: reduce` 的 CSS 关闭平滑滚动、过渡和动画；该规则已代码核对，未修改用户系统偏好做实机切换。
+- 线上浏览器控制台未见错误或警告，真实 App 截图已逐一确认加载。桌面与手机的官网效果截图随交付提供，存放于本地 `.local/screenshots/`，不随网站发布。
 
-完成上述项目后应更新本节的实际结果与验证地址，不能以本地构建成功代替线上发布成功。
+## 未执行的接入
+
+自定义域名仍待用户确定。TXT 验证、Pages Custom domain 绑定、Squarespace DNS 与新域名 HTTPS 尚未执行。现有应用入口和 DNS 均未改动。完整操作表见 [Squarespace 接入说明](./domains.md)。
 
 ## 仍缺少的资料
 

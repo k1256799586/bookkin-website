@@ -64,6 +64,7 @@ Push to `main` to run the official GitHub Pages Actions workflow. Pull requests 
 - [Hosting, usage rules and troubleshooting](docs/hosting.md)
 - [Squarespace DNS, verification and HTTPS instructions](docs/domains.md)
 - [Asset provenance](ASSETS.md)
+- [Validation and deployment evidence](docs/validation.md)
 
 `SITE_URL` is the complete public website root, including `/bookkin-website/` on default Pages. A future custom domain uses its root, such as `https://download.example.com/`. The build derives base path, canonical, sitemap, sharing image and QR URL from that one value. The QR opens `${SITE_URL}#download`.
 
