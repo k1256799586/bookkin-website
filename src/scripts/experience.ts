@@ -256,14 +256,18 @@ function setupMobileMenu() {
     const navigation = menu.querySelector('nav');
     if (menu.open && navigation) animateIn(navigation, 180, 5);
   });
-  menu.addEventListener('focusout', () => {
-    // Wait for the next element to receive focus before deciding whether to close.
-    queueMicrotask(() => {
+  menu.addEventListener('keydown', event => {
+    if (event.key !== 'Tab') return;
+    // Let keyboard focus move first. Pointer blur must not hide a link before activation.
+    requestAnimationFrame(() => {
       if (menu.open && !menu.contains(document.activeElement)) menu.open = false;
     });
   });
   menu.addEventListener('click', event => {
-    if (event.target instanceof Element && event.target.closest('a[href]')) menu.open = false;
+    if (event.target instanceof Element && event.target.closest('a[href]')) {
+      // Keep the anchor visible through its default navigation action.
+      requestAnimationFrame(() => { menu.open = false; });
+    }
   });
   document.addEventListener('pointerdown', event => {
     if (menu.open && event.target instanceof Node && !menu.contains(event.target)) menu.open = false;
