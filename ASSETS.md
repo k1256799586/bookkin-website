@@ -14,6 +14,8 @@ All account names, biographies, posts, interests and connections in these captur
 
 The sample shelves use real book titles and authors, including *The Secret Garden*, *Pride and Prejudice*, *Walden*, *Emma*, *The Time Machine*, *A Room of One’s Own*, *Frankenstein* and *Leaves of Grass*. The coloured book spines are Bookkin’s existing illustrative bindings generated from book identity. They are not publisher cover artwork. No external cover photographs or reader portraits are included.
 
+The website uses a closer crop of the bookshelf on small screens so books appear earlier. This is a CSS preview crop of the same capture; the “View screen” / “Tap image to enlarge” affordance opens the complete, unaltered screen.
+
 Recommended visible caption: **“Actual Bookkin interface with sample content.”**
 
 To replace a screenshot, export a current real app screen at the same aspect ratio, review every visible account and data field for publication, and replace the corresponding PNG. Keep the caption accurate. Product functionality and public release availability must be verified separately from screenshot capture.

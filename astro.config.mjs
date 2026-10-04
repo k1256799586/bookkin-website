@@ -4,6 +4,7 @@ import { site } from './site.config.mjs';
 
 export default defineConfig({
   output: 'static',
+  devToolbar: { enabled: false },
   site: site.origin,
   base: site.base,
   trailingSlash: 'always',

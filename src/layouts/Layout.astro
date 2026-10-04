@@ -1,10 +1,13 @@
 ---
 import { site, settings } from '../../site.config.mjs';
 import { copy } from '../content/home';
+import Icon from '../components/Icon.astro';
 import '../styles/global.css';
 import '@fontsource/newsreader/latin-400.css';
 import '@fontsource/newsreader/latin-400-italic.css';
-import '@fontsource-variable/manrope';
+import sansFont from '@fontsource-variable/manrope/files/manrope-latin-wght-normal.woff2?url';
+import serifFont from '@fontsource/newsreader/files/newsreader-latin-400-normal.woff2?url';
+import italicFont from '@fontsource/newsreader/files/newsreader-latin-400-italic.woff2?url';
 interface Props { title?: string; description?: string; notFound?: boolean; }
 const { title = copy.title, description = copy.description, notFound = false } = Astro.props;
 const legalLinks = [['Contact', settings.CONTACT_URL], ['Privacy', settings.PRIVACY_URL], ['Terms', settings.TERMS_URL]].filter(([, url]) => url);
@@ -14,6 +17,7 @@ const legalLinks = [['Contact', settings.CONTACT_URL], ['Privacy', settings.PRIV
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {[sansFont,serifFont,italicFont].map(font=><link rel="preload" href={font} as="font" type="font/woff2" crossorigin="anonymous" />)}
     <meta name="theme-color" content="#f6f5ef" />
     <meta name="description" content={description} />
     {notFound ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={site.siteUrl} />}
@@ -41,14 +45,16 @@ const legalLinks = [['Contact', settings.CONTACT_URL], ['Privacy', settings.PRIV
     <header class="site-header">
       <div class="nav-wrap">
         <a class="brand" href={site.base} aria-label="Bookkin home"><img src={site.asset('bookkin-icon.png')} width="34" height="34" alt="" /><span>Bookkin<span class="brand-dot">.</span></span></a>
-        <nav aria-label="Main navigation">
+        <div class="navigation-cluster"><nav aria-label="Main navigation">
           <a class="nav-secondary" href={`${site.base}#features`}>Features</a>
           <a class="nav-secondary" href={`${site.base}#how-it-works`}>How it works</a>
-          <a class="nav-download" href={`${site.base}#download`}>Download <span aria-hidden="true">↗</span></a>
+          <a class="nav-download" href={`${site.base}#download`}>Download <Icon name="down" size={17} /></a>
         </nav>
+        <details class="mobile-menu"><summary aria-label="Site menu"><Icon name="menu" size={21} /></summary><nav aria-label="Mobile navigation"><a href={`${site.base}#features`}>Inside Bookkin <Icon name="arrow" size={18} /></a><a href={`${site.base}#how-it-works`}>How it works <Icon name="arrow" size={18} /></a><a href={`${site.base}#faq`}>A few questions <Icon name="arrow" size={18} /></a>{settings.WEB_APP_URL&&<a href={settings.WEB_APP_URL}>Open web app <span aria-hidden="true">↗</span></a>}</nav></details>
+        </div>
       </div>
     </header>
-    <main id="main"><slot /></main>
+    <main id="main" tabindex="-1"><slot /></main>
     <footer class="site-footer wrap">
       <div class="footer-top">
         <a class="brand" href={site.base} aria-label="Bookkin home"><img src={site.asset('bookkin-icon.png')} width="32" height="32" alt="" /><span>Bookkin<span class="brand-dot">.</span></span></a>

@@ -34,7 +34,7 @@ export const copy = {
   faqs: [
     { question: 'Where can I use Bookkin?', answer: 'Bookkin is available on the web. iOS and Android downloads are not available yet. This page will show the official links when they are ready.', platformStatus: true },
     { question: 'How do I start my bookshelf?', answer: 'Create an account with Google or email, then add books from your profile. You can enter book details yourself or use the scanner. Scanned results are yours to review and edit before you add them.' },
-    { question: 'What can other readers see?', answer: 'Books you confirm and posts you publish are visible to signed-in readers you have not blocked. Adding books also creates a post about those additions. Your account details, Watchlist, and private reading analysis have their own privacy boundaries.' },
+    { question: 'What can other readers see?', answer: 'Books you confirm and posts you publish are visible to signed-in readers you have not blocked. Adding books also creates a post about those additions.' },
     { question: 'How do I discover people and books?', answer: 'Explore People to find readers through their books and interests, look through their favourites and collections, and follow them. You can also explore community posts and book suggestions in your reading insights.' },
     { question: 'Can I organise books into collections?', answer: 'Yes. Choose your favourite books, browse the topic shelves, and make your own named collections. A book can belong to more than one collection. Removing a collection does not remove its books from your library.' },
   ],

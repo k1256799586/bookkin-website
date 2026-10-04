@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import Icon from '../components/Icon.astro';
 import DownloadOption from '../components/DownloadOption.astro';
@@ -11,65 +11,68 @@ import home from '../assets/app-home.png';
 const anyDownload = !!(downloads.ios.url || downloads.android.url);
 const bothSoon = !anyDownload;
 const previewImages = [profile, people, home];
+const screenNames = ['Your bookshelf', 'Your people', 'Your community'];
+const tabNames = ['Bookshelf', 'People', 'Community'];
 const previewAlts = ['Bookkin Profile with a personal bookshelf, favourite books and collections, using sample content.', 'Bookkin People showing readers and their favourite books, using sample content.', 'Bookkin Home with a community post about books, using sample content.'];
+const fullImages = await Promise.all(previewImages.map(src => getImage({ src, width: 780, format: 'webp', quality: 90 })));
 const platformAnswer = bothSoon ? copy.faqs[0].answer : `Bookkin is available on the web. ${downloads.ios.kind === 'soon' ? 'The iOS app is coming soon.' : downloads.ios.kind === 'beta' ? 'An iOS beta is available through TestFlight.' : 'The iOS app is available on the App Store.'} ${downloads.android.kind === 'soon' ? 'The Android app is coming soon.' : downloads.android.kind === 'apk' ? 'A signed Android release is available as a direct APK download.' : 'The Android app is available on Google Play.'} See the download section for current links.`;
 ---
 <Layout>
   <section class="hero wrap" aria-labelledby="hero-heading">
-    <div class="hero-copy">
+    <div class="hero-copy" data-enter>
       <p class="eyebrow"><span class="little-star" aria-hidden="true">✳</span>{copy.hero.eyebrow}</p>
       <h1 id="hero-heading">Your books.<br /><em>Your kind</em><br />of people.</h1>
       <p class="hero-description">{copy.hero.description}</p>
-      <div class="hero-actions"><a class="button" href="#download">Get Bookkin <Icon name="arrow" /></a>{settings.WEB_APP_URL && <a class="text-link" href={settings.WEB_APP_URL}>Explore the web app <span aria-hidden="true">↗</span></a>}</div>
-      <p class="availability">{bothSoon ? 'iOS & Android apps are coming soon. Explore the web app today.' : 'Find the current iOS and Android options below.'}</p>
-    </div>
-    <figure class="hero-visual">
-      <div class="hero-stage">
-        <span class="stage-note" aria-hidden="true">A little shelf.<br />A whole lot of you.</span>
-        <div class="phone hero-phone">
-          <Image src={profile} alt={previewAlts[0]} widths={[390, 780]} sizes="(max-width: 767px) 260px, 300px" width={390} format="webp" quality={88} loading="eager" fetchpriority="high" />
-        </div>
-        <span class="stage-index" aria-hidden="true">THE BOOKKIN LIBRARY — 001</span>
-        <span class="stage-stamp" aria-hidden="true"><Icon name="book" size={26} /><span>Books bring<br />us together.</span></span>
+      <div class="hero-actions">
+        <a class="button" href="#download">{anyDownload ? 'Get Bookkin' : 'Download options'}<Icon name="arrow" /></a>
+        {settings.WEB_APP_URL && <a class="text-link" href={settings.WEB_APP_URL}>Try the web app <span aria-hidden="true">↗</span></a>}
       </div>
-      <figcaption>Actual Bookkin interface with sample content.</figcaption>
+      <p class="availability"><span class="status-dot" aria-hidden="true"></span>{bothSoon ? 'On the web now. iOS & Android coming soon.' : 'See the latest iOS and Android options.'}</p>
+    </div>
+    <figure class="hero-visual" data-enter>
+      <div class="visual-label"><span>A little shelf. A whole lot of you.</span><Icon name="spark" size={18} /></div>
+      <a class="hero-stage" href={fullImages[0].src} data-preview data-preview-title="Your bookshelf" aria-label="View the full Bookkin bookshelf screenshot">
+        <span class="shelf-line shelf-line-one" aria-hidden="true"></span><span class="shelf-line shelf-line-two" aria-hidden="true"></span>
+        <div class="phone hero-phone"><Image src={profile} alt={previewAlts[0]} widths={[390, 780]} sizes="(max-width: 760px) 278px, 260px" width={390} format="webp" quality={90} loading="eager" fetchpriority="high" /></div>
+        <span class="screen-hint"><Icon name="expand" size={16} />View screen</span>
+        <span class="hero-margin-note" aria-hidden="true">A COLLECTION OF YOU</span>
+      </a>
+      <figcaption><span class="mobile-crop-note">Bookshelf detail. </span>Actual interface, sample content.<span class="compact-preview-hint"> Tap image to enlarge.</span></figcaption>
     </figure>
   </section>
 
-  <div class="intro-rule wrap"><span>YOUR READING LIFE, A LITTLE MORE CONNECTED</span><a href="#features" aria-label="Discover Bookkin’s features"><Icon name="down" size={20} /></a></div>
+  <div class="reading-line wrap" aria-label="At a glance"><span><Icon name="book" />Keep what you love.</span><span><Icon name="people" />Find a shared favourite.</span><span><Icon name="spark" />Let a book start something.</span></div>
 
   <section id="features" class="features wrap" aria-labelledby="features-heading">
-    <div class="section-intro"><p class="eyebrow">Room for what you love</p><h2 id="features-heading">Not just what you read.<br /><em>What brings you together.</em></h2><p>Some books become part of who we are.<br />Bookkin gives them a place to live — and a way to connect.</p></div>
-    {copy.features.map((feature, index) => (
-      <article class:list={['feature-row', `feature-${index + 1}`, { 'feature-reverse': index === 1 }]}>
-        <figure class="feature-visual">
-          <div class="feature-stage">
-            <span class="feature-watermark" aria-hidden="true">{['Keep.', 'Discover.', 'Share.'][index]}</span>
-            <div class="phone feature-phone"><Image src={previewImages[index]} alt={previewAlts[index]} widths={[390, 780]} sizes="(max-width: 767px) 252px, 280px" width={390} format="webp" quality={86} loading="lazy" /></div>
-            <span class="feature-stage-label" aria-hidden="true">{['A collection of you', 'Find a shared favourite', 'Stories beyond the page'][index]}</span>
-          </div>
-          <figcaption>Actual Bookkin interface with sample content.</figcaption>
-        </figure>
-        <div class="feature-copy"><p class="eyebrow"><span class="feature-number">{feature.number}</span>{feature.label}</p><h3>{feature.title.split('\n').map((line, i) => <>{i > 0 && <br />}{line}</>)}</h3><p class="feature-description">{feature.text}</p><ul class="feature-details">{feature.details.map((detail) => <li><Icon name="check" size={17} /><span>{detail}</span></li>)}</ul></div>
-      </article>
-    ))}
-  </section>
-
-  <section id="how-it-works" class="how-section" aria-labelledby="how-heading">
-    <div class="wrap"><div class="how-heading"><div><p class="eyebrow">A small beginning</p><h2 id="how-heading">Start with a book.<br /><em>See where it takes you.</em></h2></div><p>Your shelf doesn’t have to be impressive.<br />It just has to be yours.</p></div>
-      <ol class="steps">{copy.steps.map((step, index) => <li><span class="step-number" aria-hidden="true">0{index + 1}</span><h3>{anyDownload && index === 0 ? 'Download. Settle in.' : step.title}</h3><p>{anyDownload && index === 0 ? 'Choose your platform below, download Bookkin, and create your account.' : step.text}</p></li>)}</ol>
-    </div>
-  </section>
-
-  <section class="download-section wrap" aria-labelledby="download-heading">
-    <div id="download" class="download-panel">
-      <div class="download-copy"><img class="download-icon" src={site.asset('bookkin-icon.png')} width="58" height="58" alt="" loading="lazy" /><p class="eyebrow">Take your next chapter with you</p><h2 id="download-heading">A place for your books.<br /><em>And for you.</em></h2><p class="download-description">{bothSoon ? 'The mobile apps are on their way. In the meantime, your reading life has a home on the web.' : 'Pick your platform and make yourself at home. Your next good read might begin with someone else’s shelf.'}</p>
-        <div class="platforms"><DownloadOption platform="iOS" option={downloads.ios} /><DownloadOption platform="Android" option={downloads.android} /></div>
-        {settings.WEB_APP_URL && <a class="download-web-link" href={settings.WEB_APP_URL}>Open Bookkin on the web <Icon name="arrow" size={19} /></a>}
+    <div class="section-heading" data-reveal><div><p class="eyebrow">Inside Bookkin</p><h2 id="features-heading">A personal library.<br /><em>A shared love of books.</em></h2></div><p>From the books on your shelf<br class="desktop-break" /> to the people behind theirs.<br class="desktop-break" /> Take a look around.</p></div>
+    <div class="product-tour" data-tour>
+      <div class="tour-tabs" data-tour-controls hidden aria-label="Explore Bookkin">
+        {tabNames.map((name,index)=><button type="button" data-tour-tab data-index={index} id={`tour-tab-${index}`} aria-controls={`tour-panel-${index}`}><span class="tab-number" aria-hidden="true">0{index+1}</span><span>{name}</span><Icon name={['book','people','spark'][index] as 'book'|'people'|'spark'} size={19} /></button>)}
       </div>
-      <aside class="qr-panel" aria-label="Open this page on your phone"><div class="qr-art"><img src={site.asset('download-qr.png')} alt="QR code linking to this website’s download section." width="180" height="180" loading="lazy" /></div><p class="qr-heading">Meet us on your phone.</p><p>Scan for the latest<br />download options.</p><a href={site.downloadUrl}>Open download page <span aria-hidden="true">↗</span></a></aside>
+      {copy.features.map((feature,index)=>(
+        <article class:list={['tour-panel',`tour-panel-${index+1}`]} id={`tour-panel-${index}`} data-tour-panel>
+          <div class="feature-copy"><p class="eyebrow"><span class="feature-number">{feature.number}</span>{feature.label}</p><h3>{feature.title.split('\n').map((line,i)=><>{i>0&&<br />}{line}</>)}</h3><p class="feature-description">{feature.text}</p><ul class="feature-details">{feature.details.map(detail=><li><Icon name="check" size={18} /><span>{detail}</span></li>)}</ul><a class="text-link feature-preview" href={fullImages[index].src} data-preview data-preview-title={screenNames[index]}>Explore this screen <Icon name="expand" size={16} /></a></div>
+          <figure class="feature-visual"><a class="feature-stage" href={fullImages[index].src} data-preview data-preview-title={screenNames[index]} aria-label={`View the full Bookkin ${['bookshelf','people','community'][index]} screenshot`}><span class="feature-watermark" aria-hidden="true">{['Keep.','Discover.','Share.'][index]}</span><div class="phone feature-phone"><Image src={previewImages[index]} alt={previewAlts[index]} widths={[390,780]} sizes="(max-width: 760px) 240px, 250px" width={390} format="webp" quality={90} loading="lazy" /></div><span class="screen-hint"><Icon name="expand" size={16} />View screen</span></a><figcaption>Actual Bookkin interface with sample content.<span class="compact-preview-hint"> Tap image to enlarge.</span></figcaption></figure>
+        </article>
+      ))}
     </div>
   </section>
 
-  <section id="faq" class="faq-section wrap" aria-labelledby="faq-heading"><div class="faq-intro"><p class="eyebrow">A few things to know</p><h2 id="faq-heading">Before you <br /><em>turn the page.</em></h2></div><div class="faq-list">{copy.faqs.map((faq) => <details><summary>{faq.question}<span class="faq-plus"><Icon name="plus" size={20} /></span></summary><div class="faq-answer"><p>{faq.platformStatus ? platformAnswer : faq.answer}</p>{faq.platformStatus && <a href="#download">See download options <span aria-hidden="true">↗</span></a>}</div></details>)}</div></section>
+  <section id="how-it-works" class="how-section" aria-labelledby="how-heading"><div class="wrap">
+    <div class="section-heading" data-reveal><div><p class="eyebrow">Your first chapter</p><h2 id="how-heading">Start with a book.<br /><em>See where it takes you.</em></h2></div><p>Your shelf doesn’t have to be impressive.<br class="desktop-break" /> It just has to be yours.</p></div>
+    <ol class="steps" data-reveal>{copy.steps.map((step,index)=><li><span class="step-number" aria-hidden="true">0{index+1}</span><div><h3>{anyDownload&&index===0?'Download. Settle in.':step.title}</h3><p>{anyDownload&&index===0?'Choose your platform below, download Bookkin, and create your account.':step.text}</p></div></li>)}</ol>
+  </div></section>
+
+  <section id="download" class="download-section" aria-labelledby="download-heading"><div class="download-panel wrap">
+    <div class="download-copy"><p class="eyebrow"><Icon name="book" size={21} />Your next chapter starts here</p><h2 id="download-heading">Bring your books.<br /><em>Find your people.</em></h2><p class="download-description">{bothSoon?'Bookkin is ready to explore on the web. Our iOS and Android apps are still on their way.':'Choose your platform and make yourself at home. Your next good read might begin on someone else’s shelf.'}</p>
+      <div class="platforms"><DownloadOption platform="iOS" option={downloads.ios} /><DownloadOption platform="Android" option={downloads.android} /></div>
+      {settings.WEB_APP_URL&&<div class="web-option"><a class="button button-light" href={settings.WEB_APP_URL}>Open Bookkin on the web <Icon name="arrow" /></a><p>Available now in your browser.</p></div>}
+    </div>
+    <aside class="qr-panel" aria-label="Open this page on your phone"><img class="download-icon" src={site.asset('bookkin-icon.png')} width="54" height="54" alt="" loading="lazy" /><p class="qr-heading">A quiet corner<br />for your reading life.</p><div class="qr-art"><img src={site.asset('download-qr.png')} alt="QR code linking to this website’s download section." width="180" height="180" loading="lazy" /></div><p>Scan with your phone for<br />the latest download options.</p><a href={site.downloadUrl}>Open download page <span aria-hidden="true">↗</span></a></aside>
+  </div></section>
+
+  <section id="faq" class="faq-section wrap" aria-labelledby="faq-heading"><div class="faq-intro" data-reveal><p class="eyebrow">A few things to know</p><h2 id="faq-heading">Before you <br /><em>turn the page.</em></h2><p>A little clarity before<br class="desktop-break" /> you make yourself at home.</p></div><div class="faq-list">{copy.faqs.map(faq=><details><summary>{faq.question}<span class="faq-plus"><Icon name="plus" size={20} /></span></summary><div class="faq-answer"><p>{faq.platformStatus?platformAnswer:faq.answer}</p>{faq.platformStatus&&<a href="#download">See download options <Icon name="arrow" size={17} /></a>}</div></details>)}</div></section>
+
+  <dialog id="screen-preview" class="screen-dialog" aria-labelledby="screen-preview-heading"><div class="dialog-heading"><div><h2 id="screen-preview-heading" data-preview-heading>Inside Bookkin</h2><p>Actual interface · sample content</p></div><button type="button" data-preview-close aria-label="Close screenshot"><Icon name="close" size={22} /></button></div><img data-preview-image width="780" height="1800" alt="" /></dialog>
 </Layout>
+<script>import '../scripts/experience';</script>

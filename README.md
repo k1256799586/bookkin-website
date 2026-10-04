@@ -26,6 +26,12 @@ npm run preview
 
 `verify` runs Astro type checks, download/configuration tests, a static build, and checks generated asset paths, local fonts, metadata, sitemap and decoded QR destination. The sharing image is generated from the website’s real typography and existing icon during the build.
 
+## Interaction and motion
+
+The product tour is a progressively enhanced set of accessible tabs. Users choose the screen; it never advances automatically. Arrow keys, Home and End move between tabs. Linked screenshots open a native dialog with Escape/close/backdrop support and focus restoration. Without JavaScript, all three feature sections remain readable and screenshot links open the actual image files. The mobile menu and FAQ use native `details` elements.
+
+`src/scripts/experience.ts` adds the tour, screenshot preview and a small amount of motion: 500 ms hero entrances, 440 ms once-only section entrances, and 280 ms product transitions. Controls remain usable throughout. Content is visible by default, and live `prefers-reduced-motion` changes cancel movement. CSS hover effects apply only to devices with a fine pointer.
+
 ## Update the website
 
 | What to change | Location |
@@ -33,7 +39,8 @@ npm run preview
 | Download links, platform availability, web app, contact and policy URLs | `site.config.mjs` |
 | Most product copy, steps and FAQ | `src/content/home.ts` |
 | Page composition and hero headline | `src/pages/index.astro` |
-| Colour, spacing, responsive layouts and motion | `src/styles/global.css` |
+| Colour, spacing, responsive layouts and feedback | `src/styles/global.css` |
+| Product tabs, image dialog, mobile menu and optional motion | `src/scripts/experience.ts` |
 | Actual App screenshots | `src/assets/app-profile.png`, `app-people.png`, `app-home.png` |
 | Brand icon and favicon | `public/bookkin-icon.png`, `public/favicon.png` |
 
