@@ -29,9 +29,9 @@ test('site config rejects insecure or ambiguous URLs', () => {
 });
 test('unpublished platforms do not produce download links', () => {
   const result = resolveDownloads(unpublished);
-  assert.equal(result.ios.kind, 'soon');
+  assert.equal(result.ios.kind, 'unconfigured');
   assert.equal(result.ios.url, '');
-  assert.equal(result.android.kind, 'soon');
+  assert.equal(result.android.kind, 'unconfigured');
   assert.equal(result.android.url, '');
 });
 test('beta is labelled and official store takes precedence', () => {

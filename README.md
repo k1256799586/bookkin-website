@@ -48,12 +48,12 @@ All configuration values are public. Never add secrets. Replacement screenshots 
 
 ### Download states
 
-The shipped state has **iOS and Android coming soon**. No verified native release links were available. The web app remains a secondary entry.
+The public page uses complete product copy and the working web entry. Unconfigured native download cards are omitted. Adding a verified native release URL automatically enables its platform card; no layout changes are needed.
 
 - Set `APP_STORE_URL` or `GOOGLE_PLAY_URL` to a verified live store URL. Official badge assets will appear automatically.
 - If only a public TestFlight invitation exists, set `TESTFLIGHT_URL`; it is labelled **Beta**. App Store takes precedence.
 - For a direct Android release, set `ANDROID_APK_URL`, its actual `ANDROID_APK_VERSION`, and `ANDROID_APK_RELEASE_VERIFIED: true` **only after confirming a production-signed release**. Never publish a debug APK. Store the APK in a release channel such as GitHub Releases. Google Play takes precedence.
-- Leave unavailable platforms empty. They show noninteractive “Coming soon” text, with no fake download buttons.
+- Leave unconfigured platforms empty. They are omitted from the public page, with no placeholder messaging or inactive download buttons.
 - Store status in the FAQ and getting-started copy changes with these settings.
 
 See [official badge sources and usage](docs/store-badges.md).

@@ -81,12 +81,12 @@ export function resolveDownloads(input = settings) {
       ? { kind: 'store', url: input.APP_STORE_URL, label: 'Download on the App Store', note: 'Available for iOS' }
       : input.TESTFLIGHT_URL
         ? { kind: 'beta', url: input.TESTFLIGHT_URL, label: 'Join the iOS beta', note: 'Beta · Requires TestFlight' }
-        : { kind: 'soon', url: '', label: 'Coming soon', note: 'Not available to download yet' },
+        : { kind: 'unconfigured', url: '', label: '', note: '' },
     android: input.GOOGLE_PLAY_URL
       ? { kind: 'store', url: input.GOOGLE_PLAY_URL, label: 'Get it on Google Play', note: 'Available for Android' }
       : input.ANDROID_APK_URL
         ? { kind: 'apk', url: input.ANDROID_APK_URL, label: 'Download Android APK', note: `Version ${apkVersion} · Direct download` }
-        : { kind: 'soon', url: '', label: 'Coming soon', note: 'Not available to download yet' },
+        : { kind: 'unconfigured', url: '', label: '', note: '' },
   };
 }
 

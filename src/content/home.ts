@@ -32,7 +32,7 @@ export const copy = {
     { title: 'Find your people.', text: 'Explore readers, follow a shared interest, and see where the next book takes you.' },
   ],
   faqs: [
-    { question: 'Where can I use Bookkin?', answer: 'Bookkin is available on the web. iOS and Android downloads are not available yet. This page will show the official links when they are ready.', platformStatus: true },
+    { question: 'Where can I use Bookkin?', answer: 'Open Bookkin in your browser to build your bookshelf, discover readers, and explore the community. Sign in to make yourself at home.', platformStatus: true },
     { question: 'How do I start my bookshelf?', answer: 'Create an account with Google or email, then add books from your profile. You can enter book details yourself or use the scanner. Scanned results are yours to review and edit before you add them.' },
     { question: 'What can other readers see?', answer: 'Books you confirm and posts you publish are visible to signed-in readers you have not blocked. Adding books also creates a post about those additions.' },
     { question: 'How do I discover people and books?', answer: 'Explore People to find readers through their books and interests, look through their favourites and collections, and follow them. You can also explore community posts and book suggestions in your reading insights.' },

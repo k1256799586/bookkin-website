@@ -11,6 +11,7 @@ assert.ok(html.includes(`content="${site.absolute('og.png')}"`), 'absolute OG im
 assert.ok(html.includes('id="download"'), 'download anchor exists');
 assert.ok(html.includes('lang="en"'), 'English page language');
 assert.ok(!html.includes('href=""') && !html.includes('href="#"'), 'no empty links');
+assert.ok(!/coming soon|not available to download yet|still on their way/i.test(html), 'no prelaunch placeholder copy');
 const ids = new Set([...html.matchAll(/\bid="([^"]+)"/g)].map(x=>x[1]));
 const localPaths = new Set();
 for (const [, raw] of html.matchAll(/\b(?:src|href)="([^"]+)"/g)) {
@@ -50,7 +51,7 @@ const {data,info}=await sharp('dist/download-qr.png').ensureAlpha().raw().toBuff
 const qr=jsQR(new Uint8ClampedArray(data),info.width,info.height);
 assert.equal(qr?.data,site.downloadUrl,'QR decodes to the current deployed download section');
 for (const [name,option] of Object.entries(downloads)) {
-  if(option.kind==='soon') assert.ok(html.includes(`data-platform="${name==='ios'?'iOS':'Android'}" data-status="soon"`));
+  if(!option.url) assert.ok(!html.includes(`data-platform="${name==='ios'?'iOS':'Android'}"`), 'unconfigured platform has no public download card');
 }
 for (const key of ['CONTACT_URL','PRIVACY_URL','TERMS_URL']) {
   if(!settings[key]) assert.ok(!html.includes(`>${{CONTACT_URL:'Contact',PRIVACY_URL:'Privacy',TERMS_URL:'Terms'}[key]}</a>`),`no invented ${key}`);
