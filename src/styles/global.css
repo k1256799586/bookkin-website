@@ -69,7 +69,7 @@
   .hero-actions { display:flex; align-items:center; gap:24px; flex-wrap:wrap; margin-top:28px; }
   .button { display:inline-flex; align-items:center; justify-content:center; gap:28px; min-height:56px; padding:14px 23px; background:var(--ink); color:var(--paper); border:1px solid transparent; border-radius:10px; font-size:14px; font-weight:650; transition:background var(--quick),transform var(--quick) var(--ease),box-shadow var(--quick); }
   .button svg,.text-link svg,.nav-download svg { transition:transform var(--steady) var(--ease); }
-  .button:active,.nav-download:active { transform:translateY(1px); }
+  .button:not(:disabled):active,.nav-download:active { transform:translateY(1px); }
   .text-link { display:inline-flex; align-items:center; gap:10px; min-height:48px; font-size:13px; font-weight:650; text-decoration:underline; text-decoration-color:#a8afa0; transition:text-decoration-color var(--quick); }
   .availability { display:flex; align-items:center; gap:8px; color:var(--muted); font-size:12px; margin-top:17px; }
   .status-dot { width:6px; height:6px; border-radius:50%; background:#6c805c; flex-shrink:0; }
@@ -126,6 +126,7 @@
   .platform-heading h3 { font-size:15px; font-weight:650; }
   .platform-note { font-size:12px; color:#cbd4c6; margin-top:6px; line-height:1.65; }
   .button-small { font-size:13px; margin-top:14px; padding:10px 13px; min-height:48px; gap:12px; background:var(--paper); color:var(--ink); }
+  .download-unlinked:disabled { opacity:1; cursor:default; width:100%; justify-content:space-between; text-align:left; }
   .store-badge { display:inline-flex; align-items:center; min-height:72px; padding:12px 0; margin:10px 12px 0 0; }
   .store-badge img { height:48px; width:auto; max-width:100%; object-fit:contain; }
   .web-option { display:flex; align-items:center; gap:18px; flex-wrap:wrap; margin-top:26px; }
@@ -163,10 +164,10 @@
   .not-found h1 { font-size:80px; margin:30px 0; }
   .not-found > p:not(.eyebrow) { margin-bottom:30px; color:var(--muted); }
   @media (hover:hover) and (pointer:fine) {
-    .button:hover,.nav-download:hover { background:#3b5141; box-shadow:0 4px 12px #263c3112; }
-    .button:hover svg { transform:translateX(3px); }
+    .button:not(:disabled):hover,.nav-download:hover { background:#3b5141; box-shadow:0 4px 12px #263c3112; }
+    .button:not(:disabled):hover svg { transform:translateX(3px); }
     .nav-download:hover svg { transform:translateY(3px); }
-    .button-light:hover,.button-small:hover { background:#e0e7d2; }
+    .button-light:not(:disabled):hover,.button-small:not(:disabled):hover { background:#e0e7d2; }
     .text-link:hover { text-decoration-color:currentColor; }
     .hero-stage:hover .hero-phone { transform:translateY(-4px); box-shadow:0 26px 42px -24px #18251e75; }
     .feature-stage:hover .feature-phone { transform:translateY(-5px); }

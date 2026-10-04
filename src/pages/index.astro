@@ -68,7 +68,7 @@ const platformAnswer = [
 
   <section id="download" class="download-section" aria-labelledby="download-heading"><div class="download-panel wrap">
     <div class="download-copy"><p class="eyebrow"><Icon name="book" size={21} />Your next chapter starts here</p><h2 id="download-heading">Bring your books.<br /><em>Find your people.</em></h2><p class="download-description">Build a shelf that feels like you. Discover a shared favourite. Start your next chapter with Bookkin.</p>
-      {anyDownload && <div class="platforms"><DownloadOption platform="iOS" option={downloads.ios} /><DownloadOption platform="Android" option={downloads.android} /></div>}
+      <div class="platforms"><DownloadOption platform="iOS" option={downloads.ios} /><DownloadOption platform="Android" option={downloads.android} /></div>
       {settings.WEB_APP_URL&&<div class="web-option"><a class="button button-light" href={settings.WEB_APP_URL}>Open Bookkin <Icon name="arrow" /></a><p>Your library, in your browser.</p></div>}
     </div>
     <aside class="qr-panel" aria-label="Open this page on your phone"><img class="download-icon" src={site.asset('bookkin-icon.png')} width="54" height="54" alt="" loading="lazy" /><p class="qr-heading">A quiet corner<br />for your reading life.</p><div class="qr-art"><img src={site.asset('download-qr.png')} alt="QR code linking to this website’s download section." width="180" height="180" loading="lazy" /></div><p>Scan to get started<br />on your phone.</p><a href={site.downloadUrl}>Get Bookkin <span aria-hidden="true">↗</span></a></aside>

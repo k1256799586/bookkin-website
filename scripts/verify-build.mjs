@@ -51,7 +51,9 @@ const {data,info}=await sharp('dist/download-qr.png').ensureAlpha().raw().toBuff
 const qr=jsQR(new Uint8ClampedArray(data),info.width,info.height);
 assert.equal(qr?.data,site.downloadUrl,'QR decodes to the current deployed download section');
 for (const [name,option] of Object.entries(downloads)) {
-  if(!option.url) assert.ok(!html.includes(`data-platform="${name==='ios'?'iOS':'Android'}"`), 'unconfigured platform has no public download card');
+  const platform = name === 'ios' ? 'iOS' : 'Android';
+  assert.ok(html.includes(`data-platform="${platform}"`), `${platform} download component is present`);
+  if(!option.url) assert.ok(new RegExp(`<button[^>]*disabled[^>]*aria-label="Download for ${platform}"`).test(html), `${platform} button cannot navigate until its URL is configured`);
 }
 for (const key of ['CONTACT_URL','PRIVACY_URL','TERMS_URL']) {
   if(!settings[key]) assert.ok(!html.includes(`>${{CONTACT_URL:'Contact',PRIVACY_URL:'Privacy',TERMS_URL:'Terms'}[key]}</a>`),`no invented ${key}`);

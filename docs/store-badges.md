@@ -21,7 +21,7 @@ a7dbeba4623dd255798dd1159e543cdbeeb9e43faa6db7f859b0f9ed3699932c
 
 ## Display and links
 
-- Set `APP_STORE_URL` or `GOOGLE_PLAY_URL` only after confirming that the corresponding Bookkin product page is live and downloadable. Each badge links directly to that product page. A TestFlight invitation or direct APK uses a clearly labelled text button instead of a store badge. Unreleased platforms remain ordinary “Coming soon” text.
+- Set `APP_STORE_URL` or `GOOGLE_PLAY_URL` only after confirming that the corresponding Bookkin product page is live and downloadable. Each badge links directly to that product page. A TestFlight invitation or direct APK uses a clearly labelled text button instead of a store badge. Platforms without a configured URL show custom disabled download buttons; official store badges appear only with a real store link.
 - Preserve the artwork, border, colours and aspect ratio. Do not crop, recolour, recreate, rotate, distort or animate it. Keep the Google PNG at its original pixel resolution; scale it uniformly with CSS rather than editing the file.
 - Apple specifies at least 40 px height onscreen and 10 mm in print, with clear space of at least one-quarter of badge height. Use the preferred black badge when shown with other platforms and place it first. [Apple guidance](https://developer.apple.com/app-store/marketing/guidelines/)
 - Google specifies at least 28 px height onscreen and 7.6 mm in print, with clear space of one-quarter of badge height. Its badge must be at least the size of adjacent store badges. [Google guidance](https://partnermarketinghub.withgoogle.com/brands/google-play/google-play/lockups-icons-badges/)
