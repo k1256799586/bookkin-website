@@ -8,7 +8,7 @@ interface Props {
 const { platform, option } = Astro.props;
 ---
 <div class="platform-option" data-platform={platform} data-status={option.kind}>
-  <div class="platform-heading"><Icon name="phone" size={22} /><h3>{platform}</h3></div>
+  <h3 class="sr-only">{platform}</h3>
   {option.kind === 'store' ? (
     <a href={option.url} class="store-badge" aria-label={option.label}>
       <img src={site.asset(platform === 'iOS' ? 'store-badges/app-store.svg' : 'store-badges/google-play.png')} alt={option.label} width={platform === 'iOS' ? 120 : 478} height={platform === 'iOS' ? 40 : 142} loading="lazy" />
@@ -17,7 +17,7 @@ const { platform, option } = Astro.props;
     <a class="button button-small" href={option.url}>{option.label}<Icon name="arrow" size={18} /></a>
   ) : (
     <button class="button button-small download-unlinked" type="button" disabled aria-label={`Download for ${platform}`}>
-      Download for {platform}<Icon name="down" size={18} />
+      <Icon name="phone" size={28} /><span class="download-button-copy"><span>Download for</span><strong>{platform}</strong></span><Icon name="down" size={20} />
     </button>
   )}
   {option.note && <p class="platform-note">{option.note}</p>}

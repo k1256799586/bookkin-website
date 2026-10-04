@@ -46,11 +46,11 @@ const legalLinks = [['Contact', settings.CONTACT_URL], ['Privacy', settings.PRIV
       <div class="nav-wrap">
         <a class="brand" href={site.base} aria-label="Bookkin home"><img src={site.asset('bookkin-icon.png')} width="34" height="34" alt="" /><span>Bookkin<span class="brand-dot">.</span></span></a>
         <div class="navigation-cluster"><nav aria-label="Main navigation">
-          <a class="nav-secondary" href={`${site.base}#features`}>Features</a>
-          <a class="nav-secondary" href={`${site.base}#how-it-works`}>How it works</a>
-          <a class="nav-download" href={`${site.base}#download`}>Download <Icon name="down" size={17} /></a>
+          <a class="nav-secondary" data-nav-section="features" href={`${site.base}#features`}>Features</a>
+          <a class="nav-secondary" data-nav-section="how-it-works" href={`${site.base}#how-it-works`}>How it works</a>
+          <a class="nav-download" data-nav-section="download" href={`${site.base}#download`}>Download <Icon name="down" size={17} /></a>
         </nav>
-        <details class="mobile-menu"><summary aria-label="Site menu"><Icon name="menu" size={21} /></summary><nav aria-label="Mobile navigation"><a href={`${site.base}#features`}>Inside Bookkin <Icon name="arrow" size={18} /></a><a href={`${site.base}#how-it-works`}>How it works <Icon name="arrow" size={18} /></a><a href={`${site.base}#faq`}>A few questions <Icon name="arrow" size={18} /></a>{settings.WEB_APP_URL&&<a href={settings.WEB_APP_URL}>Open web app <span aria-hidden="true">↗</span></a>}</nav></details>
+        <details class="mobile-menu"><summary aria-label="Site menu"><span class="menu-glyph" aria-hidden="true"><span></span><span></span></span></summary><nav aria-label="Mobile navigation"><a href={`${site.base}#features`}>Inside Bookkin <Icon name="arrow" size={18} /></a><a href={`${site.base}#how-it-works`}>How it works <Icon name="arrow" size={18} /></a><a href={`${site.base}#faq`}>A few questions <Icon name="arrow" size={18} /></a>{settings.WEB_APP_URL&&<a href={settings.WEB_APP_URL}>Open web app <span aria-hidden="true">↗</span></a>}</nav></details>
         </div>
       </div>
     </header>

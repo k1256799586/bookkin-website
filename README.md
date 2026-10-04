@@ -28,9 +28,9 @@ npm run preview
 
 ## Interaction and motion
 
-The product tour is a progressively enhanced set of accessible tabs. Users choose the screen; it never advances automatically. Arrow keys, Home and End move between tabs. Linked screenshots open a native dialog with Escape/close/backdrop support and focus restoration. Without JavaScript, all three feature sections remain readable and screenshot links open the actual image files. The mobile menu and FAQ use native `details` elements.
+The product tour is a progressively enhanced set of accessible tabs. Users choose the screen; it never advances automatically. Arrow keys, Home and End move between tabs. A next-chapter control makes the full tour easy to explore. Linked screenshots open a three-screen native gallery with manual selection, left/right keys, a full-size image link, Escape/close/backdrop support and focus restoration. Loading feedback is visible while the real image is decoded; every screen fits the gallery without carrying an old scroll position. Without JavaScript, all three feature sections remain readable and screenshot links open the actual image files. The mobile menu and FAQ use native `details` elements. The menu closes on Escape, selecting a link, clicking outside or tabbing away. Header links identify the current section.
 
-`src/scripts/experience.ts` adds the tour, screenshot preview and a small amount of motion: 500 ms hero entrances, 440 ms once-only section entrances, and 280 ms product transitions. Controls remain usable throughout. Content is visible by default, and live `prefers-reduced-motion` changes cancel movement. CSS hover effects apply only to devices with a fine pointer.
+`src/scripts/experience.ts` adds the tour, screenshot preview and a small amount of motion: 500 ms hero entrances with a 90 ms stagger, 440 ms once-only section entrances, 280 ms product transitions, 240 ms gallery entrances and 180 ms menu entrances. Deep links skip the off-screen hero. Controls remain usable throughout. Content is visible by default, and live `prefers-reduced-motion` changes cancel movement. CSS hover effects apply only to devices with a fine pointer; reduced motion also removes hover displacement. Focus rings use contrasting colours for light and dark sections.
 
 ## Update the website
 
