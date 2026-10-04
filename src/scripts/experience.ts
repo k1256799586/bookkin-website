@@ -36,10 +36,6 @@ function setupTour(root: HTMLElement) {
   ));
   if (orderedPanels.some(panel => !panel)) return;
   const matchedPanels = orderedPanels as HTMLElement[];
-  const pagination = root.querySelector<HTMLElement>('[data-tour-pagination]');
-  const progress = root.querySelector<HTMLElement>('[data-tour-progress]');
-  const nextButton = root.querySelector<HTMLButtonElement>('[data-tour-next]');
-  const nextLabel = nextButton?.querySelector<HTMLElement>('[data-tour-next-label]');
   let activeIndex = 0;
 
   function select(index: number, moveFocus = false, animate = true) {
@@ -51,9 +47,6 @@ function setupTour(root: HTMLElement) {
       matchedPanels[tabIndex].hidden = tabIndex !== index;
     });
     activeIndex = index;
-    if (progress) progress.textContent = `${String(index + 1).padStart(2, '0')} / ${String(tabs.length).padStart(2, '0')}`;
-    const nextTab = tabs[(index + 1) % tabs.length];
-    if (nextLabel) nextLabel.textContent = `Next: ${nextTab.getAttribute('aria-label') || (nextTab.textContent || '').trim().replace(/^\d+\s*/, '')}`;
     if (moveFocus) tabs[index].focus({ preventScroll: true });
     if (changed && animate) animateIn(matchedPanels[index], 280, 8);
   }
@@ -81,14 +74,6 @@ function setupTour(root: HTMLElement) {
   });
   controls.setAttribute('role', 'tablist');
   if (!controls.hasAttribute('aria-label')) controls.setAttribute('aria-label', 'Explore Bookkin');
-  if (pagination && progress && nextButton && nextLabel) {
-    nextButton.type = 'button';
-    nextButton.addEventListener('click', () => {
-      select((activeIndex + 1) % tabs.length, true);
-      controls.scrollIntoView({ block: 'start', behavior: reducedMotion.matches ? 'instant' : 'smooth' });
-    });
-    pagination.hidden = false;
-  }
   select(0, false, false);
   root.dataset.enhanced = 'true';
   controls.hidden = false;

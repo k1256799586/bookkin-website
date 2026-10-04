@@ -50,22 +50,17 @@ const legalLinks = [['Contact', settings.CONTACT_URL], ['Privacy', settings.PRIV
           <a class="nav-secondary" data-nav-section="how-it-works" href={`${site.base}#how-it-works`}>How it works</a>
           <a class="nav-download" data-nav-section="download" href={`${site.base}#download`}>Download <Icon name="down" size={17} /></a>
         </nav>
-        <details class="mobile-menu"><summary aria-label="Site menu"><span class="menu-glyph" aria-hidden="true"><span></span><span></span></span></summary><nav aria-label="Mobile navigation"><a href={`${site.base}#features`}>Inside Bookkin <Icon name="arrow" size={18} /></a><a href={`${site.base}#how-it-works`}>How it works <Icon name="arrow" size={18} /></a><a href={`${site.base}#faq`}>A few questions <Icon name="arrow" size={18} /></a>{settings.WEB_APP_URL&&<a href={settings.WEB_APP_URL}>Open web app <span aria-hidden="true">↗</span></a>}</nav></details>
+        <details class="mobile-menu"><summary aria-label="Site menu"><span class="menu-glyph" aria-hidden="true"><span></span><span></span></span></summary><nav aria-label="Mobile navigation"><a href={`${site.base}#features`}>Features <Icon name="arrow" size={18} /></a><a href={`${site.base}#how-it-works`}>How it works <Icon name="arrow" size={18} /></a><a href={`${site.base}#faq`}>A few questions <Icon name="arrow" size={18} /></a></nav></details>
         </div>
       </div>
     </header>
     <main id="main" tabindex="-1"><slot /></main>
     <footer class="site-footer wrap">
-      <div class="footer-top">
-        <a class="brand" href={site.base} aria-label="Bookkin home"><img src={site.asset('bookkin-icon.png')} width="32" height="32" alt="" /><span>Bookkin<span class="brand-dot">.</span></span></a>
-        <p>A quiet social library.</p>
-        <nav aria-label="Footer navigation">
-          {settings.WEB_APP_URL && <a href={settings.WEB_APP_URL}>Open web app <span aria-hidden="true">↗</span></a>}
-          {legalLinks.map(([label, url]) => <a href={url}>{label}</a>)}
-          <a href={`${site.base}#faq`}>FAQ</a>
-        </nav>
-      </div>
-      <div class="footer-bottom"><p>© {new Date().getUTCFullYear()} Bookkin</p><p>For the books. And the people behind them.</p><a href="#main">Back to top ↑</a></div>
+      <p>© {new Date().getUTCFullYear()} Bookkin</p>
+      <nav aria-label="Footer navigation">
+        {legalLinks.map(([label, url]) => <a href={url}>{label}</a>)}
+        <a href="#main">Back to top ↑</a>
+      </nav>
     </footer>
   </body>
 </html>
